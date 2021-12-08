@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>자외선</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+<style type="text/css">
+.container{
+border: 1px solid black;
+height: 960px;
+}
+.col-sm-3{
+border:1px solid red;
+height: 250px;
+margin: 10px auto;
+}
+.col-sm-6{
+border:1px solid red;
+height: 250px;
+margin: 10px auto;
+position: static;
+}
+.col-sm-big{
+    border: 1px solid green;
+    height: 520px;
+    width: 560px ;
+    float: right;
+    background: green;
+    margin: 10px auto;
+}
+.col-sm-5{
+    border: 1px solid blue;
+    height: 400px;
+    width: 570px;
+    float :left ;
+    margin:  auto;
+}
+.col-sm-5-right{
+    border: 1px solid blue;
+    height: 400px;
+    width: 560px;
+    float: right;
+    margin: auto;
+}
+
+</style>
+    </head>
+    <p style="text-align: right; padding-right: 15%;" >캡스톤6조 이요나,강준범,문지예</p>
+    
+    <hr>
+    <body>
+        <div class="container">
+            <div class="col-sm-6">
+              <img alt="" src="/static/sun.jpg" width="20%"><h2><center>{{curr_temp}}</center></h2>
+              <center>
+                <span style="color:navy"><h3>{{summary}} </h3></span>
+                
+                <hr>{{mise}},{{uv}},{{sun}},{{gang}},{{su}}
+            </center>
+            </div>
+            <div class="col-sm-big " >
+                <a href="http://www.climate.go.kr/home/09_monitoring/uv/uv_main">
+                    <img alt="" src="/media/uv.png" width="100%" height="100%">
+                </a>
+            </div>
+            <div class="col-sm-3">
+              <h3><center>오늘의 외부 자외선!</center></h3>
+              <div id="currStn">
+                서울의
+                </div>
+                <div id="currStep">
+                자외선지수는
+                </div>
+                <h4><span style="color:navy">낮음</span> 단계입니다 </h4>
+                <hr>
+                <img alt="" src="/media/uvindex (1).png">             
+            </div>
+            <div class="col-sm-3">
+                <h3><center>오늘의 내부 자외선 예측값 : </center></h3>
+                예측값 : {{predval}}<br>
+                예측값은 {{predict}}
+                {{predval}}로 uv계산식을 환산해보면 
+                {{predvaluv}} 값이 나오며, 
+                인덱스는{{predictindex}}
+
+            </div>
+            <div class="col-sm-5" style="text-align:cneter;">
+              <h2>자외선<h3>실제로 예측해보기 : </h3></h2>
+              <h5>(자외선이 궁금한날의 기상 상황에 따른 자외선을 예측해볼수 있습니다.)</h5>     
+              <form action="" method="POST">
+                <center>
+                  {% csrf_token %}
+                  <input type="number" step="0.1"size="100" placeholder="평균기온" onfocus="this.placeholder=''" onblur="this.placeholder='평균기온'" name="avg"><br>
+                  <input type="number" step="0.1"size="100" placeholder="최저기온" onfocus="this.placeholder=''" onblur="this.placeholder='최저기온'" name="min"><br>
+                  <input type="number" step="0.1"size="100" placeholder="최고기온" onfocus="this.placeholder=''" onblur="this.placeholder='최고기온'" name="max"><br>
+                  <input type="number" step="0.1"size="100" placeholder="습도" onfocus="this.placeholder=''" onblur="this.placeholder='습도'" name="hum"><br>
+                  <input type="number" step="0.1"size="100" placeholder="운량" onfocus="this.placeholder=''" onblur="this.placeholder='운량'" name="cc"><br>
+                  <input type="number" step="0.1"size="100" placeholder="uv값" onfocus="this.placeholder=''" onblur="this.placeholder='uv값'" name="uv"><br>
+                  <input type="submit">
+                  {% if result %}
+                  <h4>예상결과는 : {{result}} </h4>
+                  <h5>index값은 : {{ypredresult}}입니다.</h5>
+                  {% endif %}
+                </center>
+                </div>
+          <div class="col-sm-5-right" style="text-align: center;">
+              <table>
+                  <tr>
+                    <a href = visual>시각화 자세히보러가기</a>
+                    
+                    <td><img alt="vis1" src="/media/visualization (2).png" width="90%" height="100%" display:inline ></td>
+                    <td><img alt="vis2" src="/media/visualization (3).png" width="90%" height="100%" display:inline></td>
+                  </tr>
+               </table>
+          </div>
+        </div>
+    </body>
+</html>
